@@ -19,4 +19,6 @@ function mountWidget(selector: string, props: any) {
 export { mountWidget };
 globalThis.InjBridgeWidget = { mountWidget };
 
-// createApp(App).mount("#app");
+if (import.meta.env.MODE === "development") {
+  createApp(App).mount("#app");
+}
