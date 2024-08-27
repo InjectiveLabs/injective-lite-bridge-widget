@@ -3,19 +3,17 @@ import {
   isolateInsideOfContainer,
 } from "tailwindcss-scoped-preflight";
 
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
+
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  darkMode: ["selector", '[data-mode="dark"]'],
 
   theme: {
     extend: {},
   },
 
   important: ".inj-app",
-
-  // corePlugins: {
-  //   preflight: false,
-  // },
 
   plugins: [
     scopedPreflightStyles({
@@ -25,4 +23,4 @@ export default {
       }),
     }),
   ],
-};
+} as Config;
