@@ -1,19 +1,32 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const count = ref(0);
+const selectedView = ref("deposit");
+const addBgClasses = false;
 </script>
 
 <template>
   <div class="inj-app">
-    <div class="max-w-[370px] w-full mx-auto bg-red-500">
-      <div class="bg-gray-100 text-black dark:bg-gray-900 dark:text-white">
-        <h1 class="text-3xl font-bold">Hello World</h1>
+    <div
+      class="text-black dark:text-white p-6"
+      :class="{
+        'bg-zinc-100 dark:bg-zinc-900': addBgClasses,
+      }"
+    >
+      <h1 class="text-xl font-thin text-zinc-300 mb-4">Injective Peggy</h1>
+
+      <div
+        class="grid grid-cols-2 gap-2 p-1 border dark:border-zinc-700 rounded-lg"
+      >
         <button
-          class="bg-blue-500 text-white p-2 rounded-md"
-          @click="count++"
+          v-for="value in ['deposit', 'withdraw']"
+          class="px-2 py-2 text-sm font-semibold w-full rounded capitalize"
+          @click="selectedView = value"
+          :class="{
+            'bg-blue-400 text-black': selectedView === value,
+          }"
         >
-          Count: {{ count }}
+          {{ value }}
         </button>
       </div>
     </div>
