@@ -25,9 +25,18 @@
         margin: auto;
         padding: 10px;
       }
+
+      body {
+        background-color: #f1f1f1;
+      }
+
+      [data-mode="dark"] body {
+        background-color: #121218;
+      }
     </style>
   </head>
-  <body style="background-color: #121218; padding-top: 40px">
+  <body>
+    <button id="toggle-mode">Toggle Dark Mode</button>
     <div class="container">
       <div id="app"></div>
     </div>
@@ -36,5 +45,16 @@
       type="module"
       src="/src/main.ts"
     ></script>
+
+    <script>
+      const toggleModeBtn = document.getElementById("toggle-mode");
+      toggleModeBtn.addEventListener("click", () => {
+        if (document.documentElement.getAttribute("data-mode") === "dark") {
+          document.documentElement.setAttribute("data-mode", "light");
+        } else {
+          document.documentElement.setAttribute("data-mode", "dark");
+        }
+      });
+    </script>
   </body>
 </html>
