@@ -1,37 +1,48 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import InjectiveLogo from "./components/assets/injectiveLogo.vue";
+import { useWalletStore } from "./stores/wallet";
+import Header from "./components/layout/Header.vue";
+import ConnectWallet from "./components/partials/wallet/ConnectWallet.vue";
+import SendInj from "./components/partials/send/SendInj.vue";
+import { formatWalletAddress } from "@injectivelabs/utils";
 
-const selectedView = ref("deposit");
+const props = withDefaults(
+  defineProps<{
+    onInit: (props: any) => void;
+    onSuccess: (props: any) => void;
+
+    user: {
+      injAddress: "inj1...";
+      wallet: "Metamask";
+    };
+  }>(),
+  {}
+);
+
+const walletStore = useWalletStore();
+
 const addBgClasses = false;
 </script>
 
 <template>
   <div class="inj-app">
     <div
-      class="text-black dark:text-white p-6"
+      class="text-black dark:text-white p-4"
       :class="{
         'bg-zinc-100 dark:bg-zinc-900': addBgClasses,
       }"
     >
-      <InjectiveLogo class="h-10 mx-auto" />
-      <p class="text-center font-light text-sm -mt-2 text-gray-400 mb-6">
-        Peggy Bridge
-      </p>
+      <Header class="mb-8" />
+
+      <ConnectWallet v-if="!walletStore.isUserConnected" />
+
+      <SendInj v-else />
 
       <div
-        class="grid grid-cols-2 p-1 border border-zinc-300 dark:border-zinc-700 rounded-lg"
+        v-if="walletStore.isUserConnected"
+        class="my-8 border-t"
       >
-        <button
-          v-for="value in ['deposit', 'withdraw']"
-          class="px-2 py-2 text-sm font-semibold w-full rounded capitalize"
-          @click="selectedView = value"
-          :class="{
-            'bg-blue-200 dark:bg-blue-400 text-black': selectedView === value,
-          }"
-        >
-          {{ value }}
-        </button>
+        <p>Address:</p>
+        <p>{{ formatWalletAddress(walletStore.injectiveAddress) }}</p>
       </div>
     </div>
   </div>

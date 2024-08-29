@@ -5,10 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "rm -rf dist &&vue-tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bangjelkoski/vite-plugin-node-polyfills": "^0.0.2",
+    "@injectivelabs/exceptions": "^1.14.14.beta.17",
+    "@injectivelabs/networks": "^1.14.14.beta.17",
+    "@injectivelabs/sdk-ts": "^1.14.14.beta.17",
+    "@injectivelabs/utils": "^1.14.14.beta.17",
+    "@injectivelabs/wallet-ts": "^1.14.14.beta.17",
+    "@vueuse/core": "^11.0.3",
+    "pinia": "^2.2.2",
     "vue": "^3.4.37"
   },
   "devDependencies": {
