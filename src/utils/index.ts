@@ -11,3 +11,15 @@ export const getExplorerUrl = (): string => {
 
   return "https://explorer.injective.network";
 };
+
+export const formatCurrency = (
+  amount: number | string,
+  decimals = 2
+): string => {
+  return new Intl.NumberFormat("en-US", {
+    style: "decimal",
+
+    maximumFractionDigits: decimals,
+    minimumFractionDigits: decimals,
+  }).format(Number(amount));
+};

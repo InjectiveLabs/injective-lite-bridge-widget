@@ -4,6 +4,7 @@ import Keplr from "../../assets/wallet/Keplr.vue";
 import Metamask from "../../assets/wallet/Metamask.vue";
 import WalletOption from "./WalletOption.vue";
 import { useWalletStore } from "../../../stores/wallet";
+import Header from "../../layout/Header.vue";
 
 const walletStore = useWalletStore();
 
@@ -22,6 +23,8 @@ async function connectWallet(wallet: Wallet) {
 
 <template>
   <div>
+    <Header class="mb-8" />
+
     <h3 class="text-xl font-semibold mb-4">Connect Wallet</h3>
     <div class="border rounded-md dark:border-gray-700 p-2">
       <WalletOption
